@@ -1,27 +1,21 @@
 "use client";
 
-import React, { useState } from "react";
-
 export default function Home() {
 
-  const handleLogin = async (e: any) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    let email = "falguni@gmail.com";
-    let password = "1234";
+    const email = "falguni@gmail.com";
+    const password = "1234";
 
     const res = await fetch("/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
-    const data = await res.json();
 
     if (res.status == 200) {
-      // localStorage.setItem("token", data.token);
-      // localStorage.setItem("email", data.email);
-      // localStorage.setItem("password", data.password);
-      window.location.href = "/dashboard"; // redirect after login
+           window.location.href = "/dashboard"; // redirect after login
     } else {
       alert("Invalid credentials");
     }
